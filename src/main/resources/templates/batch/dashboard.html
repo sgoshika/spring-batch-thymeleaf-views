@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring Batch Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+</head>
+<body>
+<header>
+    <h1>Spring Batch Dashboard</h1>
+    <p>Monitor, run, and manage your batch jobs</p>
+</header>
+
+<main>
+    <section class="card">
+        <h2>Available Jobs</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Job Name</th>
+                <th>Run</th>
+                <th>Run with Parameters</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="name : ${jobNames}">
+                <td th:text="${name}">JobName</td>
+                <td>
+                    <form th:action="@{/batch/run}" method="post">
+                        <input type="hidden" name="jobName" th:value="${name}"/>
+                        <button class="btn-primary" type="submit">Run</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/batch/run}" method="post">
+                        <input type="hidden" name="jobName" th:value="${name}"/>
+                        <input type="text" name="params" placeholder="key=value,key2=value2"/>
+                        <button class="btn-secondary" type="submit">Run</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="card">
+        <h2>Recent Executions</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Execution ID</th>
+                <th>Job</th>
+                <th>Status</th>
+                <th>Start</th>
+                <th>End</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="exec : ${recent}">
+                <td><a th:href="@{'/batch/executions/' + ${exec.id}}" th:text="${exec.id}">1</a></td>
+                <td th:text="${exec.jobInstance.jobName}">JobName</td>
+                <td><span class="badge" th:classappend="${exec.status}" th:text="${exec.status}">COMPLETED</span></td>
+                <td th:text="${exec.startTime}">start</td>
+                <td th:text="${exec.endTime}">end</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

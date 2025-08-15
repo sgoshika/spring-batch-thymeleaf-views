@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Execution Details</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+</head>
+<body>
+<header>
+    <h1>Job Execution Details</h1>
+    <p>Step-level information and statistics for a specific execution</p>
+</header>
+
+<main>
+    <p>
+        <a class="btn-secondary" th:href="@{/batch}">← Back to Dashboard</a>
+    </p>
+
+    <div class="card" th:if="${exec != null}">
+        <h2>Execution <span th:text="${exec.id}">1</span></h2>
+        <p>
+            <strong>Job:</strong> <span th:text="${exec.jobInstance.jobName}">jobName</span> <br/>
+            <strong>Status:</strong>
+            <span class="badge" th:classappend="${exec.status}" th:text="${exec.status}">COMPLETED</span><br/>
+            <strong>Exit Code:</strong> <span th:text="${exec.exitStatus.exitCode}">COMPLETED</span>
+        </p>
+        <p>
+            <strong>Start:</strong> <span th:text="${exec.startTime}">start</span><br/>
+            <strong>End:</strong> <span th:text="${exec.endTime}">end</span>
+        </p>
+    </div>
+
+    <div class="card" th:if="${exec != null}">
+        <h2>Step Executions</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Step Name</th>
+                <th>Status</th>
+                <th>Reads</th>
+                <th>Writes</th>
+                <th>Commits</th>
+                <th>Rollbacks</th>
+                <th>Start</th>
+                <th>End</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="s : ${steps}">
+                <td th:text="${s.stepName}">First Step</td>
+                <td><span class="badge" th:classappend="${s.status}" th:text="${s.status}">COMPLETED</span></td>
+                <td th:text="${s.readCount}">0</td>
+                <td th:text="${s.writeCount}">0</td>
+                <td th:text="${s.commitCount}">0</td>
+                <td th:text="${s.rollbackCount}">0</td>
+                <td th:text="${s.startTime}">start</td>
+                <td th:text="${s.endTime}">end</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card" th:if="${error != null}">
+        <h2>Error</h2>
+        <p th:text="${error}">No details found.</p>
+    </div>
+</main>
+</body>
+</html>

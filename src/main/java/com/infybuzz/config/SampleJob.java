@@ -51,7 +51,7 @@ public class SampleJob {
 	}
 
 	private Step firstStep() {
-		return stepBuilderFactory.get("First Step")
+		return stepBuilderFactory.get("Tasklet Job - First Step")
 //				.allowStartIfComplete(true)
 				.tasklet(firstTaskLet)
 				.listener(firstStepListener)
@@ -70,7 +70,7 @@ public class SampleJob {
 //	}
 
 	private Step secondStep() {
-		return stepBuilderFactory.get("Second Step")
+		return stepBuilderFactory.get("Tasklet Job - Second Step")
 //				.allowStartIfComplete(true)
 				.tasklet(secondTaskLet)
 				.build();
@@ -86,7 +86,7 @@ public class SampleJob {
 	}
 
 	private Step firstChunkStep() {
-		return stepBuilderFactory.get("First Chunk Oriented Step")
+		return stepBuilderFactory.get("******* Chunk Oriented Step")
 				.<Integer,Long>chunk(3)
 				.reader(firstItemReader)
 				.processor(firstItemProcessor)

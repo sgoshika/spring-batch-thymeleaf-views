@@ -1,8 +1,9 @@
-# Spring Batch + Dashboard (Spring Boot version - 2.5.6)
+# Spring Batch + Spring REST API + Dashboard (Spring Boot version - 2.5.6)
 
 Spring Boot + Spring Batch project with:
 - **Tasklet-based Job**
 - **Chunk-oriented Job**
+- **REST API**
 - Web dashboard (Thymeleaf) to monitor, run, and restart jobs
 
 ## Features

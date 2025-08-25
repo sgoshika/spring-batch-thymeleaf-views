@@ -7,10 +7,14 @@ Spring Boot + Spring Batch project with:
 - Web dashboard (Thymeleaf) to monitor, run, and restart jobs
 
 ## Features
-- Launch jobs with parameters
-- View running and completed executions
-- Step-level execution details
-- Restart/Stop running jobs
+Launch jobs with parameters (via REST endpoints or UI)
+View running / completed executions
+- Step-level details
+- Stop / restart running jobs
+Pluggable ItemReaders:
+- FlatFileItemReader (CSV / delimited)
+- JdbcCursorItemReader (MySQL)
+- ItemReaderAdapter (consumes external REST API)
 
 ## Requirements
 - Java 17+
